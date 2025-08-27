@@ -1,0 +1,100 @@
+/* Tipografía */
+body {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  background-color: #FAFAFA;
+  color: #111;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #FFFFFF !important;
+  border-bottom: 1px solid #EAEAEA;
+  padding-block: .8rem;
+}
+
+.navbar .navbar-brand img {
+  height: 60px;
+  width: auto;
+}
+
+.navbar .nav-link {
+  color: #333 !important;
+  font-weight: 500;
+  margin: 0 .6rem;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #0A1E3F !important; /* Azul Shinkai */
+}
+
+
+.dropdown-menu {
+  border: 1px solid #EAEAEA;
+  box-shadow: none;
+}
+.dropdown-item:hover {
+  background-color: #F5F7FA;
+  color: #0A1E3F;
+}
+
+
+.navbar .form-control {
+  border-radius: 999px;
+  border: 1px solid #E0E0E0;
+  background: #FAFAFA;
+}
+.navbar .form-control:focus {
+  border-color: #0A1E3F;
+  box-shadow: 0 0 0 .15rem rgba(10,30,63,.25);
+}
+
+.navbar .btn {
+  border-radius: 999px;
+  background: #0A1E3F;
+  color: #FFF;
+  border: none;
+}
+.navbar .btn:hover {
+  background: #7ea9ff;
+}
+
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #111;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+
+.showcase img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.navbar.bg-white .nav-link {
+  color: #333 !important;
+  font-weight: 500;
+}
+.navbar.bg-white .nav-link:hover,
+.navbar.bg-white .nav-link.active {
+  color: #0A1E3F ; 
+}
+.navbar.bg-white .navbar-brand {
+  font-size: 1.6rem;
+  color: #111 !important;
+}
+
+
+
