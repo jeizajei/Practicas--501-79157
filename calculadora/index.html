@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <div class="calculadora text-center">
+    <input type="text" id="display" disabled placeholder="0" class="pantalla">
+
+    <table class="tabla-botones">
+      <tr>
+        <td><input type="button" value="C" onclick="clearDisplay()" class="boton-clear"></td>
+        <td><input type="button" value="/" onclick="appendToDisplay('/')" class="boton-operador"></td>
+        <td><input type="button" value="*" onclick="appendToDisplay('*')" class="boton-operador"></td>
+        <td><input type="button" value="-" onclick="appendToDisplay('-')" class="boton-operador"></td>
+      </tr>
+
+      <tr>
+        <td><input type="button" value="7" onclick="appendToDisplay('7')" class="boton-numero"></td>
+        <td><input type="button" value="8" onclick="appendToDisplay('8')" class="boton-numero"></td>
+        <td><input type="button" value="9" onclick="appendToDisplay('9')" class="boton-numero"></td>
+        <td rowspan="2"><input type="button" value="+" onclick="appendToDisplay('+')" class="boton-operador alto-doble"></td>
+      </tr>
+
+      <tr>
+        <td><input type="button" value="4" onclick="appendToDisplay('4')" class="boton-numero"></td>
+        <td><input type="button" value="5" onclick="appendToDisplay('5')" class="boton-numero"></td>
+        <td><input type="button" value="6" onclick="appendToDisplay('6')" class="boton-numero"></td>
+      </tr>
+
+      <tr>
+        <td><input type="button" value="1" onclick="appendToDisplay('1')" class="boton-numero"></td>
+        <td><input type="button" value="2" onclick="appendToDisplay('2')" class="boton-numero"></td>
+        <td><input type="button" value="3" onclick="appendToDisplay('3')" class="boton-numero"></td>
+        <td rowspan="2"><input type="button" value="=" onclick="calculate()" class="boton-igual alto-doble"></td>
+      </tr>
+
+      <tr>
+        <td colspan="2"><input type="button" value="0" onclick="appendToDisplay('0')" class="boton-numero ancho-doble"></td>
+        <td><input type="button" value="." onclick="appendToDisplay('.')" class="boton-numero"></td>
+      </tr>
+    </table>
+  </div>
+
+  <script src="js/index.js"></script>
+</body>
+</html>
