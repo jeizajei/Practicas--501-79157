@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>海 — Playlist</title>
+  <!-- Bootstrap 5 & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-body">
+  <div class="container-fluid px-3 px-md-4">
+    <div class="row g-3 g-lg-4 my-3 my-lg-4">
+      <!-- Left: Header + List -->
+      <main class="col-lg-8">
+        <!-- Header -->
+        <section class="playlist-hero rounded-4 position-relative overflow-hidden p-3 p-md-4 mb-3">
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://i.pinimg.com/736x/e3/a5/89/e3a5895c576934a217b26a297f21e4e7.jpg" class="cover-lg rounded-3 shadow" alt="Portada playlist">
+            <div class="flex-grow-1">
+              <div class="text-white-50 small mb-1">Playlist pública</div>
+              <h1 class="display-3 fw-black lh-1 mb-2">海</h1>
+              <div class="text-white-50 small"><span class="fw-semibold">Jeiza</span> • <span id="trackCount">0</span> canciones • <span id="totalDuration">0:00</span></div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2 gap-md-3 flex-wrap mt-3">
+            <button class="btn btn-success rounded-circle btn-lg d-flex align-items-center justify-content-center" id="btnPlay" aria-label="Reproducir">
+              <i class="bi bi-play-fill fs-2"></i>
+            </button>
+            <button class="btn btn-outline-light rounded-circle" aria-label="Me gusta"><i class="bi bi-heart"></i></button>
+            <button class="btn btn-outline-light rounded-circle" aria-label="Descargar"><i class="bi bi-arrow-down-circle"></i></button>
+            <button class="btn btn-outline-light rounded-circle" aria-label="Compartir"><i class="bi bi-person-plus"></i></button>
+            <div class="vr d-none d-md-block"></div>
+            <div class="btn-group" role="group">
+              <button class="btn btn-outline-light rounded-pill px-3"><i class="bi bi-shuffle me-2"></i>Mixear</button>
+              <button class="btn btn-outline-light rounded-circle"><i class="bi bi-three-dots"></i></button>
+            </div>
+            <div class="ms-auto d-flex align-items-center gap-2 flex-wrap">
+              <div class="input-group input-group-sm w-auto">
+                <span class="input-group-text bg-transparent border-secondary-subtle"><i class="bi bi-search"></i></span>
+                <input id="searchInput" type="search" class="form-control bg-transparent border-secondary-subtle" placeholder="Buscar">
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Orden personalizado
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><button class="dropdown-item sort" data-sort="recent">Recientes</button></li>
+                  <li><button class="dropdown-item sort" data-sort="az">A–Z</button></li>
+                  <li><button class="dropdown-item sort" data-sort="album">Álbum</button></li>
+                  <li><button class="dropdown-item sort" data-sort="duration">Duración</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Table header -->
+        <div class="d-none d-md-grid grid-header text-secondary px-2">
+          <div>#</div>
+          <div>Título</div>
+          <div>Álbum</div>
+          <div>Fecha en que se agregó</div>
+          <div class="text-end"><i class="bi bi-clock"></i></div>
+        </div>
+
+        <!-- Tracks container -->
+        <div id="tracksContainer" class="list-group list-group-flush"></div>
+      </main>
+
+      <!-- Right: Now Playing -->
+      <aside class="col-lg-4">
+        <div id="nowPlaying" class="card  border-0 rounded-4 position-sticky top-3">
+          <div class="ratio ratio-1x1 m-3 rounded-3 overflow-hidden bg-black">
+            <img id="npCover" alt="Portada actual" class="object-fit-cover">
+          </div>
+          <div class="px-3 pb-3">
+            <button class="btn btn-outline-light btn-sm rounded-pill mb-3"><i class="bi bi-camera-video me-2"></i>Cambiar a video</button>
+            <h2 id="npTitle" class="h3 mb-1">Selecciona una canción</h2>
+            <div id="npArtist" class="text-secondary mb-3">—</div>
+            <div class="mb-2 fw-semibold">Videos musicales relacionados</div>
+            <div class="related d-flex gap-2 flex-nowrap overflow-auto pb-2"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Modal delete -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar de la playlist</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          ¿Eliminar <span id="modalTrackTitle" class="fw-semibold"></span> de esta playlist?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="btnConfirmDelete">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080">
+    <div id="toast" class="toast text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div id="toastBody" class="toast-body">Acción realizada</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
